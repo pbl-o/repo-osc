@@ -1,0 +1,68 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.oscillator-container {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.amplitude-slider {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.amplitude-display {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.oscillator-4-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.oscillator-5-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+#oscillator4Timer {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#oscillator5Timer {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
