@@ -1,10 +1,28 @@
-let audioContext = null; // Initialize to null
+
+import osciladores from "./utiles/osciladores";
+
+osciladores('else');
+
+//VARIABLES GLOBALES 
+
+let audioContext = null; // Initialize to null - Instancia de audio.
 let finalGainNode = null;
-let oscillators = [];
-let gainNodes = [];
-let sawtoothOscillator = null;
+
+// Arrays de osciladores y ganancias
+let oscillators = []; //osc
+let gainNodes = []; //ganancias
+
+
+let sawtoothOscillator = null; // ?
+
+
+// frecuencia base + cantidad de osciladores a renderizar.
 const fundamentalFrequency = 32.703 * 2;
 const numberOfWaves = 128;
+
+
+
+
 
 function initializeAudioContext() {
   if (!audioContext) {
@@ -24,18 +42,25 @@ function initializeAudioContext() {
 }
 
 function setup() {
+
+  ///////////// DOM SELECTIONS
+  //Selección de elementos HTML = botones
   const sawtoothButton = document.getElementById('sawtoothButton');
   const stopSawtoothButton = document.getElementById('stopSawtoothButton');
   const triggerAllEnvelopesButton = document.getElementById('triggerAllEnvelopesButton');
   const triggerDecreaseEnvelopesButton = document.getElementById('triggerDecreaseEnvelopesButton');
 
-  // Attach event listeners
+
+
+  /////////////////////// LISETENERS
+  // Attach event listeners (incializan cadena instancia de audio y oscilador al hacer click en ellos)
   sawtoothButton.addEventListener('click', () => {
-    initializeAudioContext();
-    startSawtoothOscillator();
+    initializeAudioContext(); // instancia de audio osc - gain - destino
+
+    startSawtoothOscillator();  //activa osc.
   });
 
-  stopSawtoothButton.addEventListener('click', stopSawtoothOscillator);
+  stopSawtoothButton.addEventListener('click', stopSawtoothOscillator); // para oscilador
 
   triggerAllEnvelopesButton.addEventListener('click', () => {
     initializeAudioContext();
@@ -49,8 +74,11 @@ function setup() {
 
   triggerBothEnvelopesButton.addEventListener('click', () => {
     initializeAudioContext();
-    startBothEnvelopes();
+    startBothEnvelopes(); // inicializar osc 4 y 5
   });
+  ////////////////////////////
+
+
 
     
   // Ensure initializeAudioContext is called once when clicking on the body
@@ -82,16 +110,21 @@ function setup() {
   
 }
 
-
+// Lógica de renderizado de oscialdores en bucle.
 function startOscillators() {
   oscillators = [];
   gainNodes = [];
 
+  // Conexión de elemento html (div incial)
   const oscillatorsContainer = document.getElementById('oscillatorsContainer');
+  // determinas el contenido del contenedor como un string vacío.
   oscillatorsContainer.innerHTML = '';
 
+  // Correción de latecncia**
   const startTime = audioContext.currentTime + 0.1;
 
+
+  //Lógica de Renderizado de osciladores en función de proporcion de ganancia.
   for (let i = 0; i < numberOfWaves; i++) {
     const oscillatorFrequency = fundamentalFrequency * (i + 1);
     const oscillatorAmplitude = 0;
@@ -129,10 +162,15 @@ function startOscillators() {
       gainNode.gain.setValueAtTime(newAmplitude, audioContext.currentTime);
     });
 
+    ///////
+
+
+    /// Colocar dentro de conteiner (parent = oscillatorsContainer)
     oscillatorsContainer.appendChild(oscillatorContainer);
 
     oscillator.start(startTime);
 
+    // se colocan
     oscillators.push(oscillator);
     gainNodes.push(gainNode);
 
@@ -448,5 +486,8 @@ function triggerDecreaseEnvelopes() {
     gainNode.gain.setValueAtTime(finalAmplitude, currentTime + 4);
   });
 }
+
+
+
 
 window.onload = setup;

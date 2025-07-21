@@ -7,12 +7,20 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="oscillatorsContainer"></div>
+    <h1 id="hola"></h1>
+    <button id="monito"></button>
+
+<!-- contenedor de osciladores: Acumulación de renders de contenedores hechos en js -->
+<div id="oscillatorsContainer"></div>
+
+<!-- botones de la parte inferior de la pagina. Ya integrados al documento -->
   <button id="sawtoothButton">Start Sawtooth</button>
   <button id="stopSawtoothButton">Stop Sawtooth</button>
   <button id="triggerAllEnvelopesButton">Trigger All Envelopes</button>
   <button id="triggerDecreaseEnvelopesButton">Trigger Decrease Envelopes</button>
   <button id="triggerBothEnvelopesButton">Start Oscillator 4 & 5 Envelopes</button>
-  <script src="script.js"></script>
+
+
+  <script type="module" src="./script.js"></script>
 </body>
 </html>
